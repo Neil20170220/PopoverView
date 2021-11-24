@@ -6,7 +6,7 @@
 //
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 #import "PopoverViewCompatibility.h"
 
 
@@ -108,6 +108,42 @@
 @property (nonatomic, STRONG) NSArray *subviewsArray;
 
 @property (nonatomic, WEAK) id<PopoverViewDelegate> delegate;
+
+/*===========Configuration================*/
+// BOX GEOMETRY
+@property (nonatomic, assign) CGFloat arrowHeight;
+@property (nonatomic, assign) CGFloat boxPadding;
+@property (nonatomic, assign) CGFloat cpOffset;
+@property (nonatomic, assign) CGFloat boxRadius;
+@property (nonatomic, assign) CGFloat arrowCurvature;
+@property (nonatomic, assign) CGFloat arrowHorizontalPadding;
+@property (nonatomic, assign) CGFloat shadowAlpha;
+@property (nonatomic, assign) CGFloat shadowBlur;
+@property (nonatomic, assign) CGFloat boxAlpha;
+@property (nonatomic, assign) CGFloat topMargin;
+@property (nonatomic, assign) CGFloat horizontalMargin;
+@property (nonatomic, assign) CGFloat imageTopPadding;
+@property (nonatomic, assign) CGFloat imageBottomPadding;
+// DIVIDERS BETWEEN VIEWS
+@property (nonatomic, assign) BOOL bShowDividersBetweenViews;  //default NO
+@property (nonatomic, STRONG) UIColor* dividerColor;
+@property (nonatomic, STRONG) UIColor* gradientBottomColor;
+@property (nonatomic, STRONG) UIColor* gradientTopColor;
+// TITLE GRADIENT
+@property (nonatomic, assign) BOOL bDrawTitleGradient;        //default YES
+@property (nonatomic, STRONG) UIColor* gradientTitleBottomColor;
+@property (nonatomic, STRONG) UIColor* gradientTitleTopColor;
+// FONTS
+@property (nonatomic, STRONG) UIFont*  textFont;
+@property (nonatomic, STRONG) UIColor* textColor;
+@property (nonatomic, STRONG) UIColor* textHighlightColor;
+@property (nonatomic, STRONG) UIFont*  titleFont;
+@property (nonatomic, STRONG) UIColor* titleColor;
+// BORDER
+@property (nonatomic, assign)   BOOL bDrawBorder;   //default NO
+@property (nonatomic, STRONG) UIColor* borderColor;
+@property (nonatomic, assign)   CGFloat borderWidth;
+
 
 #pragma mark - Class Static Showing Methods
 
