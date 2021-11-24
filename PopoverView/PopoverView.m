@@ -10,6 +10,40 @@
 #import "PopoverView.h"
 #import "PopoverView_Configuration.h"
 
+@interface NSString (PopoverView)
+
+@end
+
+@implementation NSString (PopoverView)
+
+- (CGSize)ppv_sizeWithFont:(UIFont *)font {
+    NSDictionary *attributes = @{
+        NSFontAttributeName: font,
+    };
+    return [self boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX)
+                              options:NSStringDrawingUsesLineFragmentOrigin
+                           attributes:attributes
+                              context:NULL].size;
+}
+
+- (CGSize)ppv_sizeWithFont:(UIFont *)font
+         constrainedToSize:(CGSize)size
+             lineBreakMode:(NSLineBreakMode)lineBreakMode {
+    NSMutableParagraphStyle *paragraph = [[NSMutableParagraphStyle alloc] init];
+    paragraph.lineBreakMode = lineBreakMode;
+    NSDictionary *attributes = @{
+        NSFontAttributeName: font,
+        NSParagraphStyleAttributeName: paragraph,
+    };
+    return [self boundingRectWithSize:size
+                              options:NSStringDrawingUsesLineFragmentOrigin
+                           attributes:attributes
+                              context:NULL].size;
+}
+
+@end
+
+
 #pragma mark - Implementation
 
 @implementation PopoverView
@@ -227,7 +261,9 @@
     UIFont *font = self.textFont;
     
     CGSize screenSize = [self screenSize];
-    CGSize textSize = [text sizeWithFont:font constrainedToSize:CGSizeMake(screenSize.width - self.horizontalMargin * 4.f, 1000.f) lineBreakMode:UILineBreakModeWordWrap];
+    CGSize textSize = [text ppv_sizeWithFont:font
+                           constrainedToSize:CGSizeMake(screenSize.width - self.horizontalMargin * 4.f, 1000.f)
+                               lineBreakMode:UILineBreakModeWordWrap];
     
     UILabel *textView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, textSize.width, textSize.height)];
     textView.backgroundColor = [UIColor clearColor];
@@ -245,7 +281,9 @@
     UIFont *font = self.textFont;
     
     CGSize screenSize = [self screenSize];
-    CGSize textSize = [text sizeWithFont:font constrainedToSize:CGSizeMake(screenSize.width - self.horizontalMargin * 4.f, 1000.f) lineBreakMode:UILineBreakModeWordWrap];
+    CGSize textSize = [text ppv_sizeWithFont:font
+                           constrainedToSize:CGSizeMake(screenSize.width - self.horizontalMargin * 4.f, 1000.f)
+                               lineBreakMode:UILineBreakModeWordWrap];
     
     UILabel *textView = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, textSize.width, textSize.height)];
     textView.backgroundColor = [UIColor clearColor];
@@ -332,7 +370,7 @@
     UIView *container = [[UIView alloc] initWithFrame:CGRectZero];
     
     //Create a label for the title text.
-    CGSize titleSize = [title sizeWithFont:self.titleFont];
+    CGSize titleSize = [title ppv_sizeWithFont:self.titleFont];
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.f, 0.f, titleSize.width, titleSize.height)];
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.font = self.titleFont;
@@ -418,7 +456,7 @@
     UIFont *font = self.textFont;
     
     for (NSString *string in stringArray) {
-        CGSize textSize = [string sizeWithFont:font];
+        CGSize textSize = [string ppv_sizeWithFont:font];
         UIButton *textButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, textSize.width, textSize.height)];
         textButton.backgroundColor = [UIColor clearColor];
         textButton.titleLabel.font = font;
@@ -442,7 +480,7 @@
     UIFont *font = self.textFont;
     
     for (NSString *string in stringArray) {
-        CGSize textSize = [string sizeWithFont:font];
+        CGSize textSize = [string ppv_sizeWithFont:font];
         UIButton *textButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, textSize.width, textSize.height)];
         textButton.backgroundColor = [UIColor clearColor];
         textButton.titleLabel.font = font;
@@ -486,7 +524,7 @@
         NSString *string = [stringArray objectAtIndex:i];
         
         //First we build a label for the text to set in.
-        CGSize textSize = [string sizeWithFont:font];
+        CGSize textSize = [string ppv_sizeWithFont:font];
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, textSize.width, textSize.height)];
         label.backgroundColor = [UIColor clearColor];
         label.font = font;

@@ -138,7 +138,7 @@
 
 - (void)popoverView:(PopoverView *)popoverView didSelectItemAtIndex:(NSInteger)index
 {
-    NSLog(@"%s item:%d", __PRETTY_FUNCTION__, index);
+    NSLog(@"%s item: %@", __PRETTY_FUNCTION__, @(index));
     
     // Figure out which string was selected, store in "string"
     NSString *string = [kStringArray objectAtIndex:index];
