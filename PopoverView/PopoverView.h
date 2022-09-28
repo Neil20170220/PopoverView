@@ -106,6 +106,7 @@
 @property (nonatomic, STRONG) UIView *contentView;
 
 @property (nonatomic, STRONG) NSArray *subviewsArray;
+@property (nonatomic, STRONG) UIActivityIndicatorView *activityIndicator;
 
 @property (nonatomic, WEAK) id<PopoverViewDelegate> delegate;
 
